@@ -66,7 +66,7 @@ header{
   display:flex;align-items:center;justify-content:space-between;
   padding:0 2rem;
 }
-.logo{font-size:13px;font-weight:800;letter-spacing:.18em;color:#fff}
+.logo{font-size:13px;font-weight:800;letter-spacing:.18em;color:var(--txt)}
 .logo em{color:var(--muted);font-style:normal;font-weight:400}
 .hdr-sub{font-size:10px;letter-spacing:.18em;color:var(--dim);text-transform:uppercase}
 
@@ -127,7 +127,7 @@ header{
 .pkg-name{font-size:10px;font-weight:700;letter-spacing:.2em;color:var(--muted);text-transform:uppercase;margin-bottom:5px}
 .pkg-tag{font-size:12px;color:var(--dim);margin-bottom:18px;line-height:1.5}
 .pkg-price{margin-bottom:24px}
-.pkg-amt{font-size:38px;font-weight:800;letter-spacing:-.04em;color:#fff;line-height:1}
+.pkg-amt{font-size:38px;font-weight:800;letter-spacing:-.04em;color:var(--txt);line-height:1}
 .pkg-cur{font-size:13px;font-weight:600;color:var(--muted);margin-right:1px}
 .pkg-per{font-size:12px;color:var(--muted);font-weight:400}
 .pkg-feats{list-style:none;flex:1;margin-bottom:24px}
@@ -176,7 +176,7 @@ header{
 .b-ot{background:rgba(201,169,110,.14);color:var(--gold)}
 .b-ev{background:rgba(255,255,255,.04);color:var(--dim)}
 .addon-bot{display:flex;justify-content:space-between;align-items:center}
-.addon-price{font-size:17px;font-weight:800;color:#fff;letter-spacing:-.02em}
+.addon-price{font-size:17px;font-weight:800;color:var(--txt);letter-spacing:-.02em}
 .addon-tog{
   padding:6px 14px;border-radius:6px;border:1px solid var(--border);
   background:transparent;color:var(--muted);font-family:'Inter',sans-serif;
@@ -221,7 +221,7 @@ header{
 .cust-nm{font-size:13px;color:var(--txt);font-weight:500}
 .cust-hint{font-size:11px;color:var(--dim);margin-top:1px}
 .cust-right{text-align:right;flex-shrink:0}
-.cust-pr{font-size:14px;font-weight:800;color:#fff;letter-spacing:-.02em}
+.cust-pr{font-size:14px;font-weight:800;color:var(--txt);letter-spacing:-.02em}
 .cust-fr{font-size:10px;color:var(--dim)}
 .pkg-tip{
   display:none;margin-top:22px;
@@ -255,8 +255,8 @@ header{
   font-weight:700;
 }
 .sum-row.total .sname{color:var(--txt)}
-.sum-row.total .sprice{color:#fff;font-size:14px}
-.sum-row.total .sprice.monthly{color:#fff}
+.sum-row.total .sprice{color:var(--txt);font-size:14px}
+.sum-row.total .sprice.monthly{color:var(--txt)}
 .sum-empty{color:var(--dim);font-size:12px;padding:4px 0}
 .sum-main{
   height:var(--bar);display:flex;align-items:center;justify-content:space-between;
@@ -267,13 +267,13 @@ header{
   font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
   white-space:nowrap;
 }
-.sum-pkg-lbl .pname{color:#fff}
+.sum-pkg-lbl .pname{color:var(--txt)}
 .sum-pkg-lbl .none{color:var(--dim)}
 .sum-nums{display:flex;gap:20px}
 .sum-num{display:flex;flex-direction:column}
 .sum-num-lbl{font-size:9px;color:var(--dim);text-transform:uppercase;letter-spacing:.1em}
-.sum-num-val{font-size:17px;font-weight:800;color:#fff;letter-spacing:-.03em}
-.sum-num-val.hi{color:#fff}
+.sum-num-val{font-size:17px;font-weight:800;color:var(--txt);letter-spacing:-.03em}
+.sum-num-val.hi{color:var(--txt)}
 .sum-right{display:flex;align-items:center;gap:9px;flex-shrink:0}
 .exp-btn{
   padding:7px 12px;border-radius:6px;border:1px solid var(--border);
@@ -388,8 +388,8 @@ body.light{
   --border:#dedede;
   --border-s:#ebebeb;
   --txt:#111111;
-  --muted:#666666;
-  --dim:#aaaaaa;
+  --muted:#555555;
+  --dim:#888888;
   --gold:#a07828;
 }
 body.light header{background:rgba(244,244,244,.94)}
