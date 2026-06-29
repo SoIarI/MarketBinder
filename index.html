@@ -332,6 +332,8 @@ header{
   .hero{padding:52px 1rem 44px}
   .pkg-grid{grid-template-columns:1fr}
   .addons-grid{grid-template-columns:1fr}
+  .port-cell{height:200px!important}
+  .port-wide{height:240px!important}
   .sum-main{height:auto;padding:12px 1rem;flex-wrap:wrap;gap:10px}
   .sum-left{flex-direction:column;align-items:flex-start;gap:7px}
   .sum-right{width:100%;justify-content:space-between}
@@ -383,6 +385,23 @@ body.light .quote-btn{background:#111;color:#fff}
 body.light .pkg-btn:hover{border-color:#111;color:#111}
 body.light .addon-tog:hover{border-color:#111;color:#111}
 
+/* ── PORTFOLIO ── */
+.port-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  grid-template-rows:auto auto;
+  gap:10px;
+}
+.port-wide{grid-column:1/-1}
+.port-img{
+  width:100%;height:100%;object-fit:cover;
+  display:block;border-radius:8px;
+  transition:transform .35s ease,filter .35s ease;
+  filter:brightness(.95);
+}
+.port-cell{overflow:hidden;border-radius:8px;background:var(--card)}
+.port-cell:hover .port-img{transform:scale(1.04);filter:brightness(1)}
+
 /* ── PRINT / PDF ── */
 @media print{
   *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
@@ -426,11 +445,40 @@ body.light .addon-tog:hover{border-color:#111;color:#111}
   <h1>Build Your Perfect<br>Marketing Plan</h1>
   <p>Select a package, layer on à la carte services,<br>or mix your own custom build. All prices in MVR.</p>
   <nav class="hero-nav">
+    <a href="#portfolio"><i class="fa-solid fa-images"></i>Portfolio</a>
     <a href="#packages"><i class="fa-solid fa-box-open"></i>Packages</a>
     <a href="#addons"><i class="fa-solid fa-circle-plus"></i>Add-Ons</a>
     <a href="#custom"><i class="fa-solid fa-sliders"></i>Custom Builder</a>
   </nav>
 </div>
+
+<div class="divider"></div>
+
+<!-- PORTFOLIO -->
+<section class="wrap" id="portfolio">
+  <div class="sec-hdr">
+    <div class="sec-lbl">Our Work</div>
+    <h2 class="sec-title">Creative Portfolio</h2>
+    <p class="sec-desc">Food & beverage photography and content produced for our clients.</p>
+  </div>
+  <div class="port-grid">
+    <div class="port-cell port-wide" style="height:380px">
+      <img class="port-img" src="photos/food_1.jpg" alt="Food spread — table shot" loading="lazy">
+    </div>
+    <div class="port-cell" style="height:320px">
+      <img class="port-img" src="photos/food_2.jpg" alt="Signature cocktail" loading="lazy">
+    </div>
+    <div class="port-cell" style="height:320px">
+      <img class="port-img" src="photos/food_3.jpg" alt="Rice bowl close-up" loading="lazy">
+    </div>
+    <div class="port-cell" style="height:280px">
+      <img class="port-img" src="photos/food_4.jpg" alt="Overhead food spread" loading="lazy">
+    </div>
+    <div class="port-cell" style="height:280px">
+      <img class="port-img" src="photos/food_5.jpg" alt="Blue cocktail" loading="lazy">
+    </div>
+  </div>
+</section>
 
 <div class="divider"></div>
 
