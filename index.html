@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coora Studio — Marketing Catalogue</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d0d0d;
+  --surface:#111111;
+  --card:#181818;
+  --card-h:#1e1e1e;
+  --border:#252525;
+  --border-s:#1a1a1a;
+  --txt:#efefef;
+  --muted:#888;
+  --dim:#444;
+  --gold:#c9a96e;
+  --bar:80px;
+}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--txt);
+  font-family:'Inter',sans-serif;
+  font-size:14px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  padding-bottom:calc(var(--bar) + 24px);
+}
+
+/* ── HEADER ── */
+header{
+  position:sticky;top:0;z-index:100;
+  background:rgba(13,13,13,.94);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--border);
+  height:58px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 2rem;
+}
+.logo{font-size:13px;font-weight:800;letter-spacing:.18em;color:#fff}
+.logo em{color:var(--muted);font-style:normal;font-weight:400}
+.hdr-sub{font-size:10px;letter-spacing:.18em;color:var(--dim);text-transform:uppercase}
+
+/* ── HERO ── */
+.hero{
+  padding:80px 2rem 64px;
+  text-align:center;
+  max-width:760px;
+  margin:0 auto;
+}
+.hero-pill{
+  display:inline-block;
+  font-size:10px;letter-spacing:.2em;color:var(--muted);text-transform:uppercase;
+  border:1px solid var(--border);padding:4px 14px;border-radius:20px;margin-bottom:22px;
+}
+.hero h1{
+  font-size:clamp(28px,5.5vw,54px);
+  font-weight:800;letter-spacing:-.03em;line-height:1.08;
+  margin-bottom:14px;
+}
+.hero p{color:var(--muted);font-size:14px;margin-bottom:36px;line-height:1.7}
+.hero-nav{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.hero-nav a{
+  text-decoration:none;font-size:12px;font-weight:500;letter-spacing:.05em;
+  padding:9px 20px;border-radius:6px;border:1px solid var(--border);color:var(--muted);
+  transition:all .2s ease;display:flex;align-items:center;gap:7px;
+}
+.hero-nav a:hover{border-color:var(--txt);color:var(--txt);background:rgba(255,255,255,.04)}
+
+/* ── LAYOUT ── */
+.wrap{max-width:1180px;margin:0 auto;padding:64px 2rem}
+.divider{height:1px;background:var(--border);max-width:1180px;margin:0 auto}
+.sec-lbl{font-size:10px;letter-spacing:.2em;color:var(--dim);text-transform:uppercase;margin-bottom:6px}
+.sec-title{font-size:clamp(20px,2.8vw,30px);font-weight:700;letter-spacing:-.015em;margin-bottom:8px}
+.sec-desc{color:var(--muted);font-size:13px}
+.sec-hdr{margin-bottom:36px;scroll-margin-top:72px}
+
+/* ── PACKAGES ── */
+.pkg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.pkg-card{
+  background:var(--card);border:1px solid var(--border);border-radius:12px;
+  padding:30px 26px;display:flex;flex-direction:column;cursor:pointer;
+  transition:all .2s ease;position:relative;overflow:hidden;
+}
+.pkg-card::after{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:transparent;transition:background .2s ease;
+}
+.pkg-card:hover{background:var(--card-h);border-color:#333;transform:translateY(-2px);box-shadow:0 10px 40px rgba(0,0,0,.5)}
+.pkg-card.sel{border-color:#fff;box-shadow:0 0 0 1px rgba(255,255,255,.12),0 10px 40px rgba(0,0,0,.5)}
+.pkg-card.sel::after{background:#fff}
+.pkg-card.featured .pkg-badge{display:block}
+.pkg-badge{
+  display:none;font-size:9px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;
+  background:#fff;color:#000;padding:3px 10px;border-radius:20px;
+  margin-bottom:14px;width:fit-content;
+}
+.pkg-name{font-size:10px;font-weight:700;letter-spacing:.2em;color:var(--muted);text-transform:uppercase;margin-bottom:5px}
+.pkg-tag{font-size:12px;color:var(--dim);margin-bottom:18px;line-height:1.5}
+.pkg-price{margin-bottom:24px}
+.pkg-amt{font-size:38px;font-weight:800;letter-spacing:-.04em;color:#fff;line-height:1}
+.pkg-cur{font-size:13px;font-weight:600;color:var(--muted);margin-right:1px}
+.pkg-per{font-size:12px;color:var(--muted);font-weight:400}
+.pkg-feats{list-style:none;flex:1;margin-bottom:24px}
+.pkg-feats li{
+  display:flex;align-items:flex-start;gap:9px;
+  font-size:12px;color:var(--muted);
+  padding:6px 0;border-bottom:1px solid var(--border-s);
+}
+.pkg-feats li:last-child{border-bottom:none}
+.pkg-feats li i{color:#fff;font-size:10px;margin-top:4px;flex-shrink:0}
+.pkg-btn{
+  width:100%;padding:11px;border-radius:7px;
+  border:1px solid var(--border);background:transparent;
+  color:var(--muted);font-family:'Inter',sans-serif;font-size:12px;font-weight:600;
+  letter-spacing:.06em;cursor:pointer;transition:all .2s ease;
+  display:flex;align-items:center;justify-content:center;gap:7px;
+}
+.pkg-btn:hover{border-color:#fff;color:#fff}
+.pkg-card.sel .pkg-btn{background:#fff;border-color:#fff;color:#000}
+
+/* ── ADD-ONS ── */
+.cat-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+.tab-btn{
+  padding:7px 16px;border-radius:6px;border:1px solid var(--border);
+  background:transparent;color:var(--muted);font-family:'Inter',sans-serif;
+  font-size:11px;font-weight:500;letter-spacing:.06em;cursor:pointer;
+  transition:all .2s ease;display:flex;align-items:center;gap:6px;
+}
+.tab-btn:hover{border-color:#333;color:var(--txt)}
+.tab-btn.active{background:#fff;border-color:#fff;color:#000;font-weight:700}
+.addons-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.addon-card{
+  background:var(--card);border:1px solid var(--border);border-radius:10px;
+  padding:16px 18px;display:flex;flex-direction:column;gap:12px;
+  transition:border-color .2s ease;
+}
+.addon-card.sel{border-color:#fff;background:rgba(255,255,255,.02)}
+.addon-card.hide{display:none}
+.addon-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.addon-name{font-size:13px;font-weight:500;color:var(--txt);line-height:1.4;flex:1}
+.badge{
+  font-size:8px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;
+  padding:3px 7px;border-radius:4px;white-space:nowrap;flex-shrink:0;margin-top:1px;
+}
+.b-mo{background:rgba(255,255,255,.07);color:var(--muted)}
+.b-ot{background:rgba(201,169,110,.14);color:var(--gold)}
+.b-ev{background:rgba(255,255,255,.04);color:var(--dim)}
+.addon-bot{display:flex;justify-content:space-between;align-items:center}
+.addon-price{font-size:17px;font-weight:800;color:#fff;letter-spacing:-.02em}
+.addon-tog{
+  padding:6px 14px;border-radius:6px;border:1px solid var(--border);
+  background:transparent;color:var(--muted);font-family:'Inter',sans-serif;
+  font-size:11px;font-weight:600;cursor:pointer;transition:all .2s ease;white-space:nowrap;
+}
+.addon-tog:hover{border-color:#fff;color:#fff}
+.addon-card.sel .addon-tog{background:#fff;border-color:#fff;color:#000}
+
+/* ── CUSTOM BUILDER ── */
+.custom-info{
+  background:var(--card);border:1px solid var(--border);border-radius:9px;
+  padding:14px 18px;font-size:12px;color:var(--muted);
+  margin-bottom:24px;display:flex;align-items:center;gap:11px;
+}
+.custom-info i{color:var(--gold);font-size:15px;flex-shrink:0}
+.cust-groups{display:flex;flex-direction:column;gap:24px}
+.cust-grp-hdr{
+  display:flex;align-items:center;gap:9px;
+  font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:10px;
+  padding-bottom:10px;border-bottom:1px solid var(--border);
+}
+.cust-grp-hdr i{color:var(--dim)}
+.cust-items{display:flex;flex-direction:column;gap:7px}
+.cust-item{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px 14px;border-radius:8px;border:1px solid var(--border-s);
+  background:var(--card);cursor:pointer;transition:all .18s ease;gap:12px;
+}
+.cust-item:hover{border-color:var(--border);background:var(--card-h)}
+.cust-item.sel{border-color:#fff;background:rgba(255,255,255,.025)}
+.cust-left{display:flex;align-items:center;gap:11px;flex:1;min-width:0}
+.cust-chk{
+  width:17px;height:17px;border-radius:4px;border:1.5px solid var(--border);
+  flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  transition:all .15s ease;
+}
+.cust-item.sel .cust-chk{background:#fff;border-color:#fff}
+.cust-chk i{font-size:8px;color:#000;opacity:0;transition:opacity .15s ease}
+.cust-item.sel .cust-chk i{opacity:1}
+.cust-info{flex:1;min-width:0}
+.cust-nm{font-size:13px;color:var(--txt);font-weight:500}
+.cust-hint{font-size:11px;color:var(--dim);margin-top:1px}
+.cust-right{text-align:right;flex-shrink:0}
+.cust-pr{font-size:14px;font-weight:800;color:#fff;letter-spacing:-.02em}
+.cust-fr{font-size:10px;color:var(--dim)}
+.pkg-tip{
+  display:none;margin-top:22px;
+  background:rgba(201,169,110,.07);border:1px solid rgba(201,169,110,.2);
+  border-radius:9px;padding:13px 17px;font-size:12px;color:var(--gold);
+  align-items:center;gap:10px;
+}
+.pkg-tip.show{display:flex}
+.pkg-tip i{font-size:14px;flex-shrink:0}
+
+/* ── SUMMARY BAR ── */
+.sum-bar{
+  position:fixed;bottom:0;left:0;right:0;z-index:200;
+  background:rgba(18,18,18,.96);backdrop-filter:blur(18px);
+  border-top:1px solid var(--border);
+}
+.sum-panel{max-height:0;overflow:hidden;transition:max-height .3s ease;border-bottom:1px solid var(--border-s)}
+.sum-panel.open{max-height:360px}
+.sum-panel-inner{
+  padding:18px 2rem;max-width:1180px;margin:0 auto;
+  display:flex;gap:36px;flex-wrap:wrap;
+}
+.sum-col{flex:1;min-width:180px}
+.sum-col-hdr{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:9px}
+.sum-row{
+  display:flex;justify-content:space-between;
+  font-size:12px;color:var(--muted);padding:4px 0;
+}
+.sum-row.total{
+  margin-top:8px;padding-top:8px;border-top:1px solid var(--border);
+  font-weight:700;
+}
+.sum-row.total .sname{color:var(--txt)}
+.sum-row.total .sprice{color:#fff;font-size:14px}
+.sum-row.total .sprice.monthly{color:#fff}
+.sum-empty{color:var(--dim);font-size:12px;padding:4px 0}
+.sum-main{
+  height:var(--bar);display:flex;align-items:center;justify-content:space-between;
+  padding:0 2rem;max-width:1180px;margin:0 auto;gap:14px;
+}
+.sum-left{display:flex;align-items:center;gap:22px;flex:1;min-width:0}
+.sum-pkg-lbl{
+  font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  white-space:nowrap;
+}
+.sum-pkg-lbl .pname{color:#fff}
+.sum-pkg-lbl .none{color:var(--dim)}
+.sum-nums{display:flex;gap:20px}
+.sum-num{display:flex;flex-direction:column}
+.sum-num-lbl{font-size:9px;color:var(--dim);text-transform:uppercase;letter-spacing:.1em}
+.sum-num-val{font-size:17px;font-weight:800;color:#fff;letter-spacing:-.03em}
+.sum-num-val.hi{color:#fff}
+.sum-right{display:flex;align-items:center;gap:9px;flex-shrink:0}
+.exp-btn{
+  padding:7px 12px;border-radius:6px;border:1px solid var(--border);
+  background:transparent;color:var(--muted);font-family:'Inter',sans-serif;
+  font-size:11px;cursor:pointer;transition:all .2s ease;
+  display:flex;align-items:center;gap:6px;
+}
+.exp-btn:hover{border-color:var(--muted);color:var(--txt)}
+.exp-icon{transition:transform .3s ease;display:inline-block}
+.quote-btn{
+  padding:10px 22px;border-radius:8px;border:none;
+  background:#fff;color:#000;font-family:'Inter',sans-serif;
+  font-size:13px;font-weight:700;cursor:pointer;transition:all .2s ease;
+  white-space:nowrap;letter-spacing:.02em;
+}
+.quote-btn:hover{opacity:.85;transform:translateY(-1px)}
+
+/* ── MODAL ── */
+.overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.72);
+  backdrop-filter:blur(6px);z-index:300;
+  display:flex;align-items:center;justify-content:center;padding:20px;
+  opacity:0;pointer-events:none;transition:opacity .22s ease;
+}
+.overlay.open{opacity:1;pointer-events:all}
+.modal{
+  background:var(--card);border:1px solid var(--border);border-radius:14px;
+  padding:36px 32px;max-width:520px;width:100%;max-height:85vh;
+  overflow-y:auto;transform:translateY(18px);transition:transform .22s ease;
+}
+.overlay.open .modal{transform:translateY(0)}
+.modal-hdr{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:26px}
+.modal-brand{font-size:10px;font-weight:700;letter-spacing:.18em;color:var(--muted);margin-bottom:4px}
+.modal-title{font-size:22px;font-weight:800;letter-spacing:-.02em}
+.modal-x{background:none;border:none;color:var(--muted);cursor:pointer;font-size:18px;padding:4px;transition:color .2s}
+.modal-x:hover{color:var(--txt)}
+.modal-sec{margin-bottom:20px}
+.modal-sec-lbl{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:9px}
+.modal-line{
+  display:flex;justify-content:space-between;
+  padding:7px 0;border-bottom:1px solid var(--border-s);font-size:13px;
+}
+.modal-line:last-child{border-bottom:none}
+.modal-line .mn{color:var(--muted)}
+.modal-line .mp{font-weight:700;color:var(--txt)}
+.modal-tot{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:14px 0 0;border-top:1px solid var(--border);margin-top:6px;
+}
+.modal-tot-lbl{font-size:13px;font-weight:600}
+.modal-tot-val{font-size:26px;font-weight:800;color:var(--txt);letter-spacing:-.03em}
+.modal-tot-val small{font-size:13px;font-weight:400;color:var(--muted)}
+.modal-sub{font-size:11px;color:var(--dim);margin-top:2px}
+.modal-acts{display:flex;gap:9px;margin-top:24px}
+.modal-acts button{
+  flex:1;padding:12px;border-radius:8px;
+  font-family:'Inter',sans-serif;font-size:13px;font-weight:700;
+  cursor:pointer;text-align:center;transition:all .2s ease;
+  display:flex;align-items:center;justify-content:center;gap:7px;
+}
+.m-dl{background:var(--txt);color:var(--bg);border:none}
+.m-dl:hover{opacity:.82}
+.m-cl{background:transparent;color:var(--muted);border:1px solid var(--border)}
+.m-cl:hover{border-color:var(--muted);color:var(--txt)}
+.modal-empty{color:var(--muted);text-align:center;padding:24px 0;font-size:14px}
+
+/* ── FLASH ANIMATION ── */
+@keyframes valflash{0%{opacity:.5}50%{opacity:1}100%{opacity:1}}
+.flash{animation:valflash .25s ease}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .pkg-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:640px){
+  :root{--bar:108px}
+  header{padding:0 1rem}
+  .wrap{padding:44px 1rem}
+  .hero{padding:52px 1rem 44px}
+  .pkg-grid{grid-template-columns:1fr}
+  .addons-grid{grid-template-columns:1fr}
+  .sum-main{height:auto;padding:12px 1rem;flex-wrap:wrap;gap:10px}
+  .sum-left{flex-direction:column;align-items:flex-start;gap:7px}
+  .sum-right{width:100%;justify-content:space-between}
+  .sum-panel-inner{padding:16px 1rem;flex-direction:column;gap:18px}
+  .modal{padding:24px 18px}
+  .cust-item{flex-wrap:wrap}
+  .sum-nums{gap:14px}
+  .hdr-sub{display:none}
+}
+@media(max-width:420px){
+  .hero h1{font-size:26px}
+  .pkg-amt{font-size:32px}
+}
+
+/* ── MODE TOGGLE ── */
+.mode-toggle{
+  background:none;border:1px solid var(--border);border-radius:6px;
+  color:var(--muted);cursor:pointer;padding:6px 10px;font-size:14px;
+  transition:all .2s ease;line-height:1;
+}
+.mode-toggle:hover{border-color:var(--muted);color:var(--txt)}
+
+/* ── LIGHT MODE ── */
+body.light{
+  --bg:#f4f4f4;
+  --surface:#ebebeb;
+  --card:#ffffff;
+  --card-h:#f9f9f9;
+  --border:#dedede;
+  --border-s:#ebebeb;
+  --txt:#111111;
+  --muted:#666666;
+  --dim:#aaaaaa;
+  --gold:#a07828;
+}
+body.light header{background:rgba(244,244,244,.94)}
+body.light .sum-bar{background:rgba(255,255,255,.96)}
+body.light .overlay{background:rgba(0,0,0,.45)}
+body.light .pkg-card.sel{border-color:#111;box-shadow:0 0 0 1px rgba(0,0,0,.08),0 10px 40px rgba(0,0,0,.12)}
+body.light .pkg-card.sel::after{background:#111}
+body.light .pkg-card.sel .pkg-btn{background:#111;border-color:#111;color:#fff}
+body.light .pkg-feats li i{color:#111}
+body.light .tab-btn.active{background:#111;border-color:#111;color:#fff}
+body.light .addon-card.sel .addon-tog{background:#111;border-color:#111;color:#fff}
+body.light .cust-item.sel{border-color:#111}
+body.light .cust-item.sel .cust-chk{background:#111;border-color:#111}
+body.light .cust-chk i{color:#fff}
+body.light .quote-btn{background:#111;color:#fff}
+body.light .pkg-btn:hover{border-color:#111;color:#111}
+body.light .addon-tog:hover{border-color:#111;color:#111}
+
+/* ── PRINT / PDF ── */
+@media print{
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  @page{margin:2cm;size:A4}
+  body>*{display:none!important}
+  #printArea{display:block!important}
+}
+#printArea{display:none;font-family:'Inter',sans-serif;color:#111;max-width:580px;margin:0 auto}
+.pr-hdr{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:32px;padding-bottom:16px;border-bottom:2px solid #111}
+.pr-brand{font-size:11px;font-weight:800;letter-spacing:.18em;color:#111;margin-bottom:6px}
+.pr-title{font-size:28px;font-weight:800;letter-spacing:-.025em;color:#111}
+.pr-date{text-align:right;font-size:12px;color:#666}
+.pr-date-sub{font-size:11px;color:#aaa;margin-top:3px}
+.pr-sec{margin-bottom:22px}
+.pr-sec-lbl{font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#aaa;margin-bottom:10px}
+.pr-line{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #eee;font-size:13px;color:#444}
+.pr-line:last-child{border-bottom:none}
+.pr-line .pn{flex:1}
+.pr-line .pp{font-weight:700;color:#111;white-space:nowrap;padding-left:16px}
+.pr-tot{display:flex;justify-content:space-between;align-items:center;padding:16px 0 0;border-top:2px solid #111;margin-top:8px}
+.pr-tot-lbl{font-size:14px;font-weight:600}
+.pr-tot-val{font-size:28px;font-weight:800;letter-spacing:-.03em}
+.pr-tot-sub{font-size:12px;color:#666;margin-top:3px}
+.pr-foot{margin-top:40px;padding-top:14px;border-top:1px solid #ddd;font-size:11px;color:#aaa;display:flex;justify-content:space-between}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">COORA <em>STUDIO.</em></div>
+  <div style="display:flex;align-items:center;gap:12px">
+    <div class="hdr-sub">Marketing Catalogue</div>
+    <button class="mode-toggle" onclick="toggleMode()" id="modeBtn" title="Toggle light/dark mode">
+      <i class="fa-solid fa-sun" id="modeIcon"></i>
+    </button>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-pill">2026 Service Catalogue</div>
+  <h1>Build Your Perfect<br>Marketing Plan</h1>
+  <p>Select a package, layer on à la carte services,<br>or mix your own custom build. All prices in MVR.</p>
+  <nav class="hero-nav">
+    <a href="#packages"><i class="fa-solid fa-box-open"></i>Packages</a>
+    <a href="#addons"><i class="fa-solid fa-circle-plus"></i>Add-Ons</a>
+    <a href="#custom"><i class="fa-solid fa-sliders"></i>Custom Builder</a>
+  </nav>
+</div>
+
+<div class="divider"></div>
+
+<!-- PACKAGES -->
+<section class="wrap" id="packages">
+  <div class="sec-hdr">
+    <div class="sec-lbl">Step 01</div>
+    <h2 class="sec-title">Choose a Package</h2>
+    <p class="sec-desc">Pick a foundation. You can layer add-ons on top, or skip straight to the custom builder below.</p>
+  </div>
+  <div class="pkg-grid" id="pkgGrid"></div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ADD-ONS -->
+<section class="wrap" id="addons">
+  <div class="sec-hdr">
+    <div class="sec-lbl">Step 02 — Optional</div>
+    <h2 class="sec-title">À La Carte Add-Ons</h2>
+    <p class="sec-desc">Layer individual services on top of any package or custom build.</p>
+  </div>
+  <div class="cat-tabs" id="catTabs"></div>
+  <div class="addons-grid" id="addonsGrid"></div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CUSTOM BUILDER -->
+<section class="wrap" id="custom">
+  <div class="sec-hdr">
+    <div class="sec-lbl">Step 03 — Alternative to packages</div>
+    <h2 class="sec-title">Custom Package Builder</h2>
+    <p class="sec-desc">Mix individual components from across all tiers. Selecting a component here clears any preset package selection.</p>
+  </div>
+  <div class="custom-info">
+    <i class="fa-solid fa-lightbulb"></i>
+    <span>Standalone component pricing is higher than bundled packages — use this to explore what you need, then check if a package covers it.</span>
+  </div>
+  <div class="cust-groups" id="custGroups"></div>
+  <div class="pkg-tip" id="pkgTip">
+    <i class="fa-solid fa-wand-magic-sparkles"></i>
+    <span id="pkgTipTxt"></span>
+  </div>
+</section>
+
+<!-- SUMMARY BAR -->
+<div class="sum-bar">
+  <div class="sum-panel" id="sumPanel">
+    <div class="sum-panel-inner" id="sumPanelInner"></div>
+  </div>
+  <div style="max-width:1180px;margin:0 auto">
+    <div class="sum-main">
+      <div class="sum-left">
+        <div class="sum-pkg-lbl" id="sumLbl"><span class="none">Nothing selected</span></div>
+        <div class="sum-nums">
+          <div class="sum-num">
+            <span class="sum-num-lbl">Monthly</span>
+            <span class="sum-num-val hi" id="sumMo">MVR 0</span>
+          </div>
+          <div class="sum-num" id="sumOtWrap" style="display:none">
+            <span class="sum-num-lbl">One-time</span>
+            <span class="sum-num-val" id="sumOt">MVR 0</span>
+          </div>
+        </div>
+      </div>
+      <div class="sum-right">
+        <button class="exp-btn" onclick="togglePanel()">
+          <span class="exp-icon" id="expIcon"><i class="fa-solid fa-chevron-up"></i></span>
+          Details
+        </button>
+        <button class="quote-btn" onclick="openModal()">Get a Quote</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="overlay" id="overlay" onclick="overlayClick(event)">
+  <div class="modal">
+    <div class="modal-hdr">
+      <div>
+        <div class="modal-brand">COORA STUDIO.</div>
+        <div class="modal-title">Your Quote</div>
+      </div>
+      <button class="modal-x" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div id="modalBody"></div>
+    <div class="modal-acts">
+      <button class="m-dl" onclick="downloadPDF()"><i class="fa-solid fa-file-arrow-down"></i>Download PDF</button>
+      <button class="m-cl" onclick="closeModal()">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- PRINT AREA -->
+<div id="printArea"></div>
+
+<script>
+// ── DATA ──────────────────────────────────────────────────────────────
+
+const PKGS = [
+  {
+    id:'standard',name:'Standard',featured:false,price:2350,
+    tag:'Half-plan for very small cafes, biweekly cycle',
+    feats:[
+      'Photo shoot every 2 months',
+      '4 short-form videos/mo (Reels or TikTok)',
+      'Content calendar & caption (1 platform)',
+    ]
+  },
+  {
+    id:'exclusive',name:'Exclusive',featured:true,price:10000,
+    tag:'Half-plan for single locations easing into video',
+    feats:[
+      'Half-day photo shoot, every month',
+      'Edited menu/ambience photos — 20+ photos',
+      'Photos licensed for Google, IG & Delivery apps',
+      '8 short-form videos/mo — hook & tested variants',
+      'Content calendar & captions (1 platform)',
+    ]
+  },
+  {
+    id:'premium',name:'Premium',featured:false,price:29250,
+    tag:'Half-plan for 2-location groups easing into premium',
+    feats:[
+      'Full-day pro shoot/month — 100 edited photos',
+      'Influencer program — 1–2 nano creators/mo',
+      '15 short-form videos/mo — serialized format',
+      '1 cinematic long-form video/mo',
+      'Cross-platform repost (TikTok → Reels → Shorts)',
+    ]
+  }
+];
+
+const ADDON_CATS = [
+  {
+    id:'pv',label:'Photo & Video',icon:'fa-camera',
+    items:[
+      {id:'pv1',name:'Extra photo shoot day',price:2000,bill:'/shoot',ot:false},
+      {id:'pv2',name:'Drone aerial shots (exterior/rooftop)',price:1850,bill:'/shoot',ot:false},
+      {id:'pv3',name:'Menu re-shoot after seasonal update',price:1500,bill:'/shoot',ot:false},
+      {id:'pv4',name:'Staff & founder portrait session',price:1200,bill:'/session',ot:false},
+      {id:'pv5',name:'Extra short-form video, 1-off',price:650,bill:'/video',ot:false},
+      {id:'pv6',name:'Extra long-form aesthetic video',price:3200,bill:'/video',ot:false},
+    ]
+  },
+  {
+    id:'wt',label:'Web & Tech',icon:'fa-globe',
+    items:[
+      {id:'wt1',name:'Restaurant website build (mobile-first)',price:18500,bill:'one-time',ot:true},
+      {id:'wt2',name:'Commission-free online ordering setup',price:9500,bill:'one-time',ot:true},
+      {id:'wt3',name:'QR code digital menu system',price:2200,bill:'one-time',ot:true},
+      {id:'wt4',name:'Reservation system integration',price:3500,bill:'one-time',ot:true},
+      {id:'wt5',name:'Loyalty/rewards app setup',price:12000,bill:'one-time',ot:true},
+      {id:'wt6',name:'Monthly website maintenance',price:1400,bill:'/mo',ot:false},
+    ]
+  },
+  {
+    id:'pa',label:'Paid Ads',icon:'fa-chart-line',
+    items:[
+      {id:'pa1',name:'Additional ad spend management',price:2500,bill:'/mo + 3k spend',ot:false},
+      {id:'pa2',name:'Google Ads / Maps local campaign',price:3800,bill:'/mo',ot:false},
+      {id:'pa3',name:'Geofencing campaign',price:4200,bill:'/mo',ot:false},
+      {id:'pa4',name:'Extra nano/micro creator slot',price:1500,bill:'/mo',ot:false},
+      {id:'pa5',name:'Influencer dinner & content swap event',price:3000,bill:'/event',ot:false},
+      {id:'pa6',name:'A/B hook & thumbnail testing',price:1200,bill:'/mo',ot:false},
+    ]
+  },
+  {
+    id:'rp',label:'Reputation',icon:'fa-star',
+    items:[
+      {id:'rp1',name:'Review management, extra platforms',price:900,bill:'/mo',ot:false},
+      {id:'rp2',name:'GEO / AI search optimization',price:2800,bill:'/mo',ot:false},
+      {id:'rp3',name:'Local SEO audit & GBP optimization',price:3500,bill:'one-time',ot:true},
+      {id:'rp4',name:'Crisis/negative review response retainer',price:1800,bill:'/mo',ot:false},
+      {id:'rp5',name:'Customer feedback survey system',price:1200,bill:'/mo',ot:false},
+    ]
+  }
+];
+
+const CUST_GROUPS = [
+  {
+    cat:'Photography',icon:'fa-camera',
+    items:[
+      {id:'cp1',name:'Bimonthly photo shoot',price:1500,hint:'Included in Standard'},
+      {id:'cp2',name:'Monthly half-day shoot (20+ edited photos)',price:4500,hint:'Included in Exclusive'},
+      {id:'cp3',name:'Monthly full-day shoot (100 photos, on-demand)',price:9500,hint:'Included in Premium'},
+      {id:'cp4',name:'Photo licensing (Google, IG, Delivery apps)',price:1500,hint:'Included in Exclusive & Premium'},
+    ]
+  },
+  {
+    cat:'Video Content',icon:'fa-video',
+    items:[
+      {id:'cv1',name:'4 short-form videos/mo',price:1200,hint:'Included in Standard'},
+      {id:'cv2',name:'8 short-form videos/mo (hook & tested)',price:2800,hint:'Included in Exclusive'},
+      {id:'cv3',name:'15 short-form videos/mo (serialized)',price:5500,hint:'Included in Premium'},
+      {id:'cv4',name:'1 cinematic long-form video/mo',price:3500,hint:'Included in Premium'},
+    ]
+  },
+  {
+    cat:'Content Management',icon:'fa-calendar-days',
+    items:[
+      {id:'cm1',name:'Content calendar & captions (1 platform)',price:800,hint:'Included in all packages'},
+      {id:'cm2',name:'Content calendar & captions (multi-platform)',price:1500,hint:''},
+    ]
+  },
+  {
+    cat:'Growth & Distribution',icon:'fa-rocket',
+    items:[
+      {id:'cg1',name:'Influencer program (1–2 nano creators/mo)',price:4500,hint:'Included in Premium'},
+      {id:'cg2',name:'Cross-platform repost system (TikTok→Reels→Shorts)',price:1800,hint:'Included in Premium'},
+    ]
+  }
+];
+
+const ALL_ADDONS = ADDON_CATS.flatMap(c=>c.items);
+const ALL_COMPS  = CUST_GROUPS.flatMap(g=>g.items);
+
+// ── STATE ─────────────────────────────────────────────────────────────
+
+const S = {
+  pkg: null,          // 'standard'|'exclusive'|'premium'|null
+  custom: false,
+  addons: new Set(),
+  comps: new Set(),
+  cat: 'pv',
+  panelOpen: false,
+};
+
+// ── HELPERS ───────────────────────────────────────────────────────────
+
+const fmt = n => 'MVR ' + n.toLocaleString('en-US');
+
+function pkgPrice(){
+  if(!S.pkg||S.custom) return 0;
+  return PKGS.find(p=>p.id===S.pkg)?.price??0;
+}
+function custTotal(){
+  let t=0; S.comps.forEach(id=>{const c=ALL_COMPS.find(x=>x.id===id);if(c)t+=c.price;}); return t;
+}
+function moAddons(){
+  let t=0; S.addons.forEach(id=>{const a=ALL_ADDONS.find(x=>x.id===id);if(a&&!a.ot)t+=a.price;}); return t;
+}
+function otAddons(){
+  let t=0; S.addons.forEach(id=>{const a=ALL_ADDONS.find(x=>x.id===id);if(a&&a.ot)t+=a.price;}); return t;
+}
+function moTotal(){ return pkgPrice()+custTotal()+moAddons(); }
+function otTotal(){ return otAddons(); }
+
+function flash(el){el.classList.remove('flash');void el.offsetWidth;el.classList.add('flash')}
+
+// ── ACTIONS ───────────────────────────────────────────────────────────
+
+function selPkg(id){
+  if(S.pkg===id){S.pkg=null;}
+  else{S.pkg=id;S.custom=false;S.comps.clear();}
+  renderPkgs();renderComps();renderBar();if(S.panelOpen)renderPanel();
+}
+
+function togAddon(id){
+  S.addons.has(id)?S.addons.delete(id):S.addons.add(id);
+  renderAddons();renderBar();if(S.panelOpen)renderPanel();
+}
+
+function togComp(id){
+  if(S.comps.has(id)){S.comps.delete(id);}
+  else{S.comps.add(id);S.pkg=null;S.custom=true;}
+  if(S.comps.size===0)S.custom=false;
+  renderPkgs();renderComps();renderBar();if(S.panelOpen)renderPanel();renderTip();
+}
+
+function setCat(id){
+  S.cat=id;
+  renderCatTabs();renderAddons();
+}
+
+function togglePanel(){
+  S.panelOpen=!S.panelOpen;
+  document.getElementById('sumPanel').classList.toggle('open',S.panelOpen);
+  document.getElementById('expIcon').style.transform=S.panelOpen?'rotate(180deg)':'';
+  if(S.panelOpen)renderPanel();
+}
+
+// ── RENDER ────────────────────────────────────────────────────────────
+
+function renderPkgs(){
+  document.getElementById('pkgGrid').innerHTML=PKGS.map(p=>`
+    <div class="pkg-card ${S.pkg===p.id?'sel':''} ${p.featured?'featured':''}" onclick="selPkg('${p.id}')">
+      <div class="pkg-badge">Most Popular</div>
+      <div class="pkg-name">${p.name}</div>
+      <div class="pkg-tag">${p.tag}</div>
+      <div class="pkg-price">
+        <div class="pkg-amt"><span class="pkg-cur">MVR&nbsp;</span>${p.price.toLocaleString('en-US')}<span class="pkg-per">&nbsp;/mo</span></div>
+      </div>
+      <ul class="pkg-feats">
+        ${p.feats.map(f=>`<li><i class="fa-solid fa-check"></i>${f}</li>`).join('')}
+      </ul>
+      <button class="pkg-btn">
+        ${S.pkg===p.id?'<i class="fa-solid fa-check"></i>&nbsp;Selected':'Select Package'}
+      </button>
+    </div>
+  `).join('');
+}
+
+function renderCatTabs(){
+  document.getElementById('catTabs').innerHTML=ADDON_CATS.map(c=>`
+    <button class="tab-btn ${S.cat===c.id?'active':''}" onclick="setCat('${c.id}')">
+      <i class="fa-solid ${c.icon}"></i>${c.label}
+    </button>
+  `).join('');
+}
+
+function renderAddons(){
+  const allItems=ADDON_CATS.flatMap(c=>c.items.map(i=>({...i,cat:c.id})));
+  document.getElementById('addonsGrid').innerHTML=allItems.map(a=>{
+    const sel=S.addons.has(a.id);
+    const bc=a.ot?'b-ot':(a.bill.includes('event')||a.bill.includes('shoot')||a.bill.includes('session')||a.bill.includes('video')?'b-ev':'b-mo');
+    return `
+    <div class="addon-card ${sel?'sel':''} ${a.cat!==S.cat?'hide':''}">
+      <div class="addon-top">
+        <div class="addon-name">${a.name}</div>
+        <span class="badge ${bc}">${a.bill}</span>
+      </div>
+      <div class="addon-bot">
+        <div class="addon-price">${fmt(a.price)}</div>
+        <button class="addon-tog" onclick="togAddon('${a.id}')" aria-pressed="${sel}">
+          ${sel?'<i class="fa-solid fa-check"></i>&nbsp;Added':'+ Add'}
+        </button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function renderComps(){
+  document.getElementById('custGroups').innerHTML=CUST_GROUPS.map(g=>`
+    <div>
+      <div class="cust-grp-hdr"><i class="fa-solid ${g.icon}"></i>${g.cat}</div>
+      <div class="cust-items">
+        ${g.items.map(item=>{
+          const sel=S.comps.has(item.id);
+          return `
+          <div class="cust-item ${sel?'sel':''}" onclick="togComp('${item.id}')">
+            <div class="cust-left">
+              <div class="cust-chk"><i class="fa-solid fa-check"></i></div>
+              <div class="cust-info">
+                <div class="cust-nm">${item.name}</div>
+                ${item.hint?`<div class="cust-hint">${item.hint}</div>`:''}
+              </div>
+            </div>
+            <div class="cust-right">
+              <div class="cust-pr">${fmt(item.price)}</div>
+              <div class="cust-fr">/mo</div>
+            </div>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderBar(){
+  const mo=moTotal(), ot=otTotal();
+  const lbl=document.getElementById('sumLbl');
+  const addonCount=S.addons.size;
+  const addonSuffix=addonCount>0?` <span style="color:var(--dim);font-size:9px;font-weight:400;letter-spacing:0">+${addonCount} add-on${addonCount!==1?'s':''}</span>`:'';
+
+  if(S.custom&&S.comps.size>0){
+    lbl.innerHTML=`<span class="pname">CUSTOM BUILD</span> <span style="color:var(--dim);font-size:9px;font-weight:400;letter-spacing:0">${S.comps.size} component${S.comps.size!==1?'s':''}</span>${addonSuffix}`;
+  } else if(S.pkg){
+    const p=PKGS.find(x=>x.id===S.pkg);
+    lbl.innerHTML=`<span style="color:var(--dim);font-weight:400;font-size:9px;letter-spacing:0">Package: </span><span class="pname">${p.name.toUpperCase()}</span>${addonSuffix}`;
+  } else {
+    lbl.innerHTML=`<span class="none">Nothing selected</span>`;
+  }
+
+  const moEl=document.getElementById('sumMo');
+  const newMo=fmt(mo);
+  if(moEl.textContent!==newMo){moEl.textContent=newMo;flash(moEl);}
+
+  const otWrap=document.getElementById('sumOtWrap');
+  if(ot>0){
+    otWrap.style.display='';
+    document.getElementById('sumOt').textContent=fmt(ot);
+  } else {
+    otWrap.style.display='none';
+  }
+}
+
+function renderPanel(){
+  const inner=document.getElementById('sumPanelInner');
+  const moLines=[], otLines=[];
+
+  if(S.pkg&&!S.custom){
+    const p=PKGS.find(x=>x.id===S.pkg);
+    moLines.push({name:p.name+' Package',price:p.price});
+  }
+  S.comps.forEach(id=>{const c=ALL_COMPS.find(x=>x.id===id);if(c)moLines.push({name:c.name,price:c.price});});
+  S.addons.forEach(id=>{
+    const a=ALL_ADDONS.find(x=>x.id===id);
+    if(a){a.ot?otLines.push({name:a.name,price:a.price}):moLines.push({name:a.name,price:a.price});}
+  });
+
+  const mo=moTotal(), ot=otTotal();
+  let html='';
+
+  if(moLines.length===0&&otLines.length===0){
+    html='<div class="sum-empty">No items selected yet.</div>';
+  } else {
+    if(moLines.length>0){
+      html+=`<div class="sum-col"><div class="sum-col-hdr">Monthly Recurring</div>`;
+      moLines.forEach(l=>{html+=`<div class="sum-row"><span class="sname">${l.name}</span><span class="sprice">${fmt(l.price)}</span></div>`;});
+      html+=`<div class="sum-row total"><span class="sname">Monthly Total</span><span class="sprice monthly">${fmt(mo)}</span></div>`;
+      html+='</div>';
+    }
+    if(otLines.length>0){
+      html+=`<div class="sum-col"><div class="sum-col-hdr">One-Time Fees</div>`;
+      otLines.forEach(l=>{html+=`<div class="sum-row"><span class="sname">${l.name}</span><span class="sprice">${fmt(l.price)}</span></div>`;});
+      html+=`<div class="sum-row total"><span class="sname">One-Time Total</span><span class="sprice">${fmt(ot)}</span></div>`;
+      html+='</div>';
+    }
+  }
+  inner.innerHTML=html;
+}
+
+function renderTip(){
+  const tip=document.getElementById('pkgTip');
+  const txt=document.getElementById('pkgTipTxt');
+  if(!S.custom||S.comps.size===0){tip.classList.remove('show');return;}
+  const ct=custTotal();
+  let best=PKGS[0];
+  for(const p of PKGS){if(Math.abs(p.price-ct)<Math.abs(best.price-ct))best=p;}
+  if(ct>0){
+    const cheaper=PKGS.filter(p=>p.price<=ct*1.4&&p.price>=ct*0.5);
+    const suggest=cheaper.length?cheaper[cheaper.length-1]:best;
+    txt.textContent=`Tip — Your custom selection is ${fmt(ct)}/mo. The ${suggest.name} package at ${fmt(suggest.price)}/mo may cover similar needs at better value.`;
+    tip.classList.add('show');
+  } else {
+    tip.classList.remove('show');
+  }
+}
+
+// ── MODAL ─────────────────────────────────────────────────────────────
+
+function openModal(){
+  const mo=moTotal(), ot=otTotal();
+  let html='';
+
+  if(S.pkg&&!S.custom){
+    const p=PKGS.find(x=>x.id===S.pkg);
+    html+=`<div class="modal-sec"><div class="modal-sec-lbl">Selected Package</div>
+      <div class="modal-line"><span class="mn">${p.name} Package</span><span class="mp">${fmt(p.price)}/mo</span></div>
+    </div>`;
+  }
+
+  if(S.custom&&S.comps.size>0){
+    html+=`<div class="modal-sec"><div class="modal-sec-lbl">Custom Components</div>`;
+    S.comps.forEach(id=>{
+      const c=ALL_COMPS.find(x=>x.id===id);
+      if(c) html+=`<div class="modal-line"><span class="mn">${c.name}</span><span class="mp">${fmt(c.price)}/mo</span></div>`;
+    });
+    html+='</div>';
+  }
+
+  const moA=[], otA=[];
+  S.addons.forEach(id=>{const a=ALL_ADDONS.find(x=>x.id===id);if(a){a.ot?otA.push(a):moA.push(a);}});
+
+  if(moA.length){
+    html+=`<div class="modal-sec"><div class="modal-sec-lbl">Monthly Add-Ons</div>`;
+    moA.forEach(a=>{
+      html+=`<div class="modal-line"><span class="mn">${a.name} <span style="color:var(--dim);font-size:11px">${a.bill}</span></span><span class="mp">${fmt(a.price)}</span></div>`;
+    });
+    html+='</div>';
+  }
+
+  if(otA.length){
+    html+=`<div class="modal-sec"><div class="modal-sec-lbl">One-Time Add-Ons</div>`;
+    otA.forEach(a=>{
+      html+=`<div class="modal-line"><span class="mn">${a.name}</span><span class="mp">${fmt(a.price)}</span></div>`;
+    });
+    html+='</div>';
+  }
+
+  if(mo===0&&ot===0){
+    html='<div class="modal-empty">No items selected. Choose a package or add components first.</div>';
+  } else {
+    html+=`<div class="modal-tot">
+      <div>
+        <div class="modal-tot-lbl">Monthly Total</div>
+        ${ot>0?`<div class="modal-sub">+ One-time: ${fmt(ot)}</div>`:''}
+      </div>
+      <div class="modal-tot-val">${fmt(mo)}<small>/mo</small></div>
+    </div>`;
+  }
+
+  document.getElementById('modalBody').innerHTML=html;
+  document.getElementById('overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function closeModal(){
+  document.getElementById('overlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+function overlayClick(e){if(e.target===document.getElementById('overlay'))closeModal();}
+
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+
+// ── LIGHT / DARK MODE ─────────────────────────────────────────────────
+
+function toggleMode(){
+  const light=document.body.classList.toggle('light');
+  document.getElementById('modeIcon').className=light?'fa-solid fa-moon':'fa-solid fa-sun';
+  localStorage.setItem('cs-mode',light?'light':'dark');
+}
+
+// ── PDF DOWNLOAD ──────────────────────────────────────────────────────
+
+function downloadPDF(){
+  const mo=moTotal(), ot=otTotal();
+  const date=new Date().toLocaleDateString('en-GB',{year:'numeric',month:'long',day:'numeric'});
+  let body='';
+
+  if(S.pkg&&!S.custom){
+    const p=PKGS.find(x=>x.id===S.pkg);
+    body+=`<div class="pr-sec"><div class="pr-sec-lbl">Selected Package</div>
+      <div class="pr-line"><span class="pn">${p.name} Package</span><span class="pp">${fmt(p.price)}/mo</span></div>
+    </div>`;
+  }
+
+  if(S.custom&&S.comps.size>0){
+    body+=`<div class="pr-sec"><div class="pr-sec-lbl">Custom Components</div>`;
+    S.comps.forEach(id=>{
+      const c=ALL_COMPS.find(x=>x.id===id);
+      if(c) body+=`<div class="pr-line"><span class="pn">${c.name}</span><span class="pp">${fmt(c.price)}/mo</span></div>`;
+    });
+    body+='</div>';
+  }
+
+  const moA=[], otA=[];
+  S.addons.forEach(id=>{const a=ALL_ADDONS.find(x=>x.id===id);if(a){a.ot?otA.push(a):moA.push(a);}});
+
+  if(moA.length){
+    body+=`<div class="pr-sec"><div class="pr-sec-lbl">Monthly Add-Ons</div>`;
+    moA.forEach(a=>{body+=`<div class="pr-line"><span class="pn">${a.name} <span style="color:#aaa;font-size:11px">${a.bill}</span></span><span class="pp">${fmt(a.price)}</span></div>`;});
+    body+='</div>';
+  }
+
+  if(otA.length){
+    body+=`<div class="pr-sec"><div class="pr-sec-lbl">One-Time Add-Ons</div>`;
+    otA.forEach(a=>{body+=`<div class="pr-line"><span class="pn">${a.name}</span><span class="pp">${fmt(a.price)}</span></div>`;});
+    body+='</div>';
+  }
+
+  if(mo>0||ot>0){
+    body+=`<div class="pr-tot">
+      <div>
+        <div class="pr-tot-lbl">Monthly Total</div>
+        ${ot>0?`<div class="pr-tot-sub">+ One-time: ${fmt(ot)}</div>`:''}
+      </div>
+      <div class="pr-tot-val">${fmt(mo)}<span style="font-size:14px;font-weight:400;color:#666">/mo</span></div>
+    </div>`;
+  }
+
+  document.getElementById('printArea').innerHTML=`
+    <div class="pr-hdr">
+      <div>
+        <div class="pr-brand">COORA STUDIO.</div>
+        <div class="pr-title">Quote Summary</div>
+      </div>
+      <div class="pr-date">${date}<div class="pr-date-sub">All prices in MVR (Maldivian Rufiyaa)</div></div>
+    </div>
+    ${body}
+    <div class="pr-foot">
+      <span>Coora Studio · Marketing Catalogue 2026</span>
+      <span>Prices are indicative and subject to confirmation</span>
+    </div>
+  `;
+  window.print();
+}
+
+// ── INIT ──────────────────────────────────────────────────────────────
+
+function init(){
+  if(localStorage.getItem('cs-mode')==='light'){
+    document.body.classList.add('light');
+    document.getElementById('modeIcon').className='fa-solid fa-moon';
+  }
+  renderPkgs();
+  renderCatTabs();
+  renderAddons();
+  renderComps();
+  renderBar();
+}
+
+document.addEventListener('DOMContentLoaded',init);
+</script>
+</body>
+</html>
