@@ -409,10 +409,14 @@ body.light .pkg-btn:hover{border-color:#111;color:#111}
 body.light .addon-tog:hover{border-color:#111;color:#111}
 
 /* ── PORTFOLIO ── */
+.port-sub-hdr{
+  font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--dim);margin-bottom:16px;display:flex;align-items:center;gap:8px;
+}
+.port-sub-hdr+.port-grid{margin-bottom:40px}
 .port-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
-  grid-template-rows:auto auto;
   gap:10px;
 }
 .port-wide{grid-column:1/-1}
@@ -424,6 +428,65 @@ body.light .addon-tog:hover{border-color:#111;color:#111}
 }
 .port-cell{overflow:hidden;border-radius:8px;background:var(--card)}
 .port-cell:hover .port-img{transform:scale(1.04);filter:brightness(1)}
+.port-empty{color:var(--dim);font-size:13px;padding:24px 0}
+/* ── VIDEO GRID ── */
+.vid-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:12px;
+}
+.vid-card{
+  position:relative;border-radius:10px;overflow:hidden;
+  background:var(--card);border:1px solid var(--border);
+  aspect-ratio:16/9;cursor:pointer;
+}
+.vid-thumb{width:100%;height:100%;object-fit:cover;display:block}
+.vid-no-thumb{width:100%;height:100%;background:var(--surface);display:flex;align-items:center;justify-content:center}
+.vid-overlay{
+  position:absolute;inset:0;
+  background:rgba(0,0,0,.42);
+  display:flex;align-items:center;justify-content:center;
+  transition:background .2s;
+}
+.vid-card:hover .vid-overlay{background:rgba(0,0,0,.25)}
+.vid-play{
+  width:52px;height:52px;border-radius:50%;
+  background:rgba(255,255,255,.92);
+  display:flex;align-items:center;justify-content:center;
+  color:#111;font-size:18px;padding-left:3px;
+  box-shadow:0 4px 18px rgba(0,0,0,.4);
+  transition:transform .2s,box-shadow .2s;
+}
+.vid-card:hover .vid-play{transform:scale(1.1);box-shadow:0 8px 28px rgba(0,0,0,.5)}
+.vid-info{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:10px 14px;
+  background:linear-gradient(transparent,rgba(0,0,0,.72));
+  color:#fff;font-size:12px;font-weight:500;line-height:1.4;
+}
+/* ── VIDEO PLAYER MODAL ── */
+.vid-modal-overlay{
+  position:fixed;inset:0;z-index:500;
+  background:rgba(0,0,0,.88);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;
+  transition:opacity .25s ease;
+  padding:20px;
+}
+.vid-modal-overlay.open{opacity:1;pointer-events:all}
+.vid-modal-wrap{position:relative;width:100%;max-width:900px}
+.vid-modal-close{
+  position:absolute;top:-38px;right:0;
+  background:none;border:none;color:rgba(255,255,255,.7);
+  cursor:pointer;font-size:22px;padding:4px 8px;
+  transition:color .2s;line-height:1;
+}
+.vid-modal-close:hover{color:#fff}
+.vid-modal{
+  width:100%;aspect-ratio:16/9;
+  border-radius:10px;overflow:hidden;background:#000;
+}
+.vid-modal iframe,.vid-modal video{width:100%;height:100%;border:none;display:block}
 
 /* ── ADMIN DRAWER ── */
 .admin-scrim{position:fixed;inset:0;z-index:390;background:rgba(0,0,0,.55);opacity:0;pointer-events:none;transition:opacity .3s ease}
@@ -529,26 +592,21 @@ body.light .addon-tog:hover{border-color:#111;color:#111}
   <div class="sec-hdr">
     <div class="sec-lbl">Our Work</div>
     <h2 class="sec-title">Creative Portfolio</h2>
-    <p class="sec-desc">Food & beverage photography and content produced for our clients.</p>
+    <p class="sec-desc">Photography and video content produced for our clients.</p>
   </div>
-  <div class="port-grid">
-    <div class="port-cell port-wide" style="height:380px">
-      <img class="port-img" src="photos/food_1.jpg" alt="Food spread — table shot" loading="lazy">
-    </div>
-    <div class="port-cell" style="height:320px">
-      <img class="port-img" src="photos/food_2.jpg" alt="Signature cocktail" loading="lazy">
-    </div>
-    <div class="port-cell" style="height:320px">
-      <img class="port-img" src="photos/food_3.jpg" alt="Rice bowl close-up" loading="lazy">
-    </div>
-    <div class="port-cell" style="height:280px">
-      <img class="port-img" src="photos/food_4.jpg" alt="Overhead food spread" loading="lazy">
-    </div>
-    <div class="port-cell" style="height:280px">
-      <img class="port-img" src="photos/food_5.jpg" alt="Blue cocktail" loading="lazy">
-    </div>
-  </div>
+  <div class="port-sub-hdr"><i class="fa-solid fa-images"></i>Photography</div>
+  <div class="port-grid" id="portImgGrid"></div>
+  <div class="port-sub-hdr" id="portVidSubHdr" style="margin-top:40px"><i class="fa-solid fa-film"></i>Video</div>
+  <div class="vid-grid" id="portVidGrid"></div>
 </section>
+
+<!-- VIDEO PLAYER -->
+<div class="vid-modal-overlay" id="vidOverlay" onclick="closeVideo(event)">
+  <div class="vid-modal-wrap">
+    <button class="vid-modal-close" onclick="closeVideo()">✕</button>
+    <div class="vid-modal" id="vidModal"></div>
+  </div>
+</div>
 
 <div class="divider"></div>
 
@@ -658,6 +716,7 @@ body.light .addon-tog:hover{border-color:#111;color:#111}
     <button class="admin-tab" data-tab="packages" onclick="setAdminTab('packages')">Packages</button>
     <button class="admin-tab" data-tab="addons" onclick="setAdminTab('addons')">Add-Ons</button>
     <button class="admin-tab" data-tab="components" onclick="setAdminTab('components')">Components</button>
+    <button class="admin-tab" data-tab="portfolio" onclick="setAdminTab('portfolio')">Portfolio</button>
   </div>
   <div class="admin-body" id="adminBody"></div>
   <div class="admin-footer">
@@ -788,6 +847,17 @@ let CUST_GROUPS = [
 
 let ALL_ADDONS = ADDON_CATS.flatMap(c=>c.items);
 let ALL_COMPS  = CUST_GROUPS.flatMap(g=>g.items);
+
+let PORTFOLIO = {
+  images:[
+    {id:'pi1',src:'photos/food_1.jpg',alt:'Food spread — table shot',wide:true},
+    {id:'pi2',src:'photos/food_2.jpg',alt:'Signature cocktail',wide:false},
+    {id:'pi3',src:'photos/food_3.jpg',alt:'Rice bowl close-up',wide:false},
+    {id:'pi4',src:'photos/food_4.jpg',alt:'Overhead food spread',wide:false},
+    {id:'pi5',src:'photos/food_5.jpg',alt:'Blue cocktail',wide:false},
+  ],
+  videos:[],
+};
 
 // ── STATE ─────────────────────────────────────────────────────────────
 
@@ -1012,6 +1082,82 @@ function renderTip(){
   }
 }
 
+// ── PORTFOLIO ─────────────────────────────────────────────────────────
+
+function renderPortfolio(){ renderPortImages(); renderPortVideos(); }
+
+function renderPortImages(){
+  const grid=document.getElementById('portImgGrid');
+  if(!PORTFOLIO.images.length){
+    grid.innerHTML='<p class="port-empty">No images added yet — add some in the Admin panel.</p>';
+    return;
+  }
+  grid.innerHTML=PORTFOLIO.images.map(img=>`
+    <div class="port-cell${img.wide?' port-wide':''}" style="height:${img.wide?'380px':'300px'}">
+      <img class="port-img" src="${img.src}" alt="${escHtml(img.alt)}" loading="lazy">
+    </div>`).join('');
+}
+
+function renderPortVideos(){
+  const grid=document.getElementById('portVidGrid');
+  const hdr=document.getElementById('portVidSubHdr');
+  if(!PORTFOLIO.videos.length){hdr.style.display='none';grid.innerHTML='';return;}
+  hdr.style.display='';
+  grid.innerHTML=PORTFOLIO.videos.map(vid=>{
+    const thumb=ytThumb(vid.url);
+    return `
+    <div class="vid-card" onclick="openVideo('${vid.id}')">
+      ${thumb
+        ?`<img class="vid-thumb" src="${thumb}" alt="${escHtml(vid.title)}" loading="lazy">`
+        :`<div class="vid-no-thumb"></div>`}
+      <div class="vid-overlay"><div class="vid-play"><i class="fa-solid fa-play"></i></div></div>
+      ${vid.title?`<div class="vid-info">${escHtml(vid.title)}</div>`:''}
+    </div>`;
+  }).join('');
+}
+
+function parseVidUrl(url){
+  const yt=url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+  if(yt) return {type:'youtube',id:yt[1]};
+  const vm=url.match(/vimeo\.com\/(\d+)/);
+  if(vm) return {type:'vimeo',id:vm[1]};
+  if(/\.(mp4|webm|mov|ogg)(\?.*)?$/i.test(url)) return {type:'direct',id:null};
+  return {type:'unknown',id:null};
+}
+function ytThumb(url){
+  const p=parseVidUrl(url);
+  return p.type==='youtube'?`https://img.youtube.com/vi/${p.id}/hqdefault.jpg`:null;
+}
+function embedUrl(url){
+  const p=parseVidUrl(url);
+  if(p.type==='youtube') return `https://www.youtube.com/embed/${p.id}?autoplay=1&rel=0`;
+  if(p.type==='vimeo')   return `https://player.vimeo.com/video/${p.id}?autoplay=1`;
+  return null;
+}
+
+function openVideo(id){
+  const vid=PORTFOLIO.videos.find(v=>v.id===id);
+  if(!vid) return;
+  const modal=document.getElementById('vidModal');
+  const em=embedUrl(vid.url);
+  if(em){
+    modal.innerHTML=`<iframe src="${em}" allow="autoplay;fullscreen;picture-in-picture" allowfullscreen></iframe>`;
+  } else {
+    modal.innerHTML=`<video src="${vid.url}" controls autoplay style="width:100%;height:100%"></video>`;
+  }
+  document.getElementById('vidOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function closeVideo(e){
+  if(e&&e.target!==document.getElementById('vidOverlay')&&!e.target.closest('.vid-modal-close')) return;
+  document.getElementById('vidOverlay').classList.remove('open');
+  document.getElementById('vidModal').innerHTML='';
+  document.body.style.overflow='';
+}
+
+function escHtml(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
 // ── MODAL ─────────────────────────────────────────────────────────────
 
 function openModal(){
@@ -1077,7 +1223,17 @@ function closeModal(){
 
 function overlayClick(e){if(e.target===document.getElementById('overlay'))closeModal();}
 
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closeAdmin();}});
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){
+    closeModal();
+    closeAdmin();
+    if(document.getElementById('vidOverlay').classList.contains('open')){
+      document.getElementById('vidOverlay').classList.remove('open');
+      document.getElementById('vidModal').innerHTML='';
+      document.body.style.overflow='';
+    }
+  }
+});
 
 // ── LIGHT / DARK MODE ─────────────────────────────────────────────────
 
@@ -1166,6 +1322,7 @@ const D_BRANDING    = JSON.parse(JSON.stringify(BRANDING));
 const D_PKGS        = JSON.parse(JSON.stringify(PKGS));
 const D_ADDON_CATS  = JSON.parse(JSON.stringify(ADDON_CATS));
 const D_CUST_GROUPS = JSON.parse(JSON.stringify(CUST_GROUPS));
+const D_PORTFOLIO   = JSON.parse(JSON.stringify(PORTFOLIO));
 
 function refreshDerived(){
   ALL_ADDONS=ADDON_CATS.flatMap(c=>c.items);
@@ -1181,13 +1338,14 @@ function loadSavedData(){
     if(d.packages)  {PKGS.length=0;       PKGS.push(...d.packages);}
     if(d.addonCats) {ADDON_CATS.length=0;  ADDON_CATS.push(...d.addonCats);}
     if(d.custGroups){CUST_GROUPS.length=0; CUST_GROUPS.push(...d.custGroups);}
+    if(d.portfolio) {Object.assign(PORTFOLIO,d.portfolio);}
     refreshDerived();
   }catch(e){}
 }
 
 function persistData(){
   localStorage.setItem('cs-data',JSON.stringify({
-    branding:BRANDING,packages:PKGS,addonCats:ADDON_CATS,custGroups:CUST_GROUPS
+    branding:BRANDING,packages:PKGS,addonCats:ADDON_CATS,custGroups:CUST_GROUPS,portfolio:PORTFOLIO
   }));
 }
 
@@ -1198,9 +1356,10 @@ function resetData(){
   PKGS.length=0;        PKGS.push(...JSON.parse(JSON.stringify(D_PKGS)));
   ADDON_CATS.length=0;  ADDON_CATS.push(...JSON.parse(JSON.stringify(D_ADDON_CATS)));
   CUST_GROUPS.length=0; CUST_GROUPS.push(...JSON.parse(JSON.stringify(D_CUST_GROUPS)));
+  Object.assign(PORTFOLIO,JSON.parse(JSON.stringify(D_PORTFOLIO)));
   refreshDerived();
   applyBranding();
-  renderPkgs();renderCatTabs();renderAddons();renderComps();renderBar();
+  renderPkgs();renderCatTabs();renderAddons();renderComps();renderBar();renderPortfolio();
   renderAdmin();
 }
 
@@ -1245,6 +1404,7 @@ function adminBodyHTML(){
     case 'packages':   return adminPackagesHTML();
     case 'addons':     return adminAddonsHTML();
     case 'components': return adminComponentsHTML();
+    case 'portfolio':  return adminPortfolioHTML();
   }
   return '';
 }
@@ -1387,6 +1547,58 @@ function adminComponentsHTML(){
 </div>`).join('');
 }
 
+function adminPortfolioHTML(){
+  return `
+<div class="admin-sec">
+  <div class="admin-sec-title">Images</div>
+  ${PORTFOLIO.images.map((img,ii)=>`
+  <div class="admin-addon-item">
+    <div class="admin-field">
+      <label class="admin-label">Image URL or path</label>
+      ${aInp('text',img.src,{action:'port-img',ii,key:'src'},'photos/food_1.jpg or https://...')}
+    </div>
+    <div class="admin-row2">
+      <div class="admin-field" style="flex:1">
+        <label class="admin-label">Alt / caption</label>
+        ${aInp('text',img.alt,{action:'port-img',ii,key:'alt'},'Description')}
+      </div>
+      <div style="padding-top:18px;display:flex;align-items:center;gap:10px;flex-shrink:0">
+        <label class="admin-toggle-label">
+          <input type="checkbox" ${img.wide?'checked':''} data-action="port-img-wide" data-ii="${ii}">
+          Wide
+        </label>
+        <button class="admin-rm-btn" data-action="rm-port-img" data-ii="${ii}">✕</button>
+      </div>
+    </div>
+  </div>`).join('')}
+  <button class="admin-add-btn" data-action="add-port-img">+ Add image</button>
+</div>
+
+<div class="admin-sec">
+  <div class="admin-sec-title">Videos</div>
+  <p style="font-size:11px;color:var(--dim);margin-bottom:14px;line-height:1.6">
+    Paste a YouTube, Vimeo, or direct .mp4 URL. YouTube thumbnails load automatically.
+  </p>
+  ${PORTFOLIO.videos.map((vid,vi)=>`
+  <div class="admin-addon-item">
+    <div class="admin-field">
+      <label class="admin-label">Video URL</label>
+      ${aInp('text',vid.url,{action:'port-vid',vi,key:'url'},'https://youtube.com/watch?v=...')}
+    </div>
+    <div class="admin-row2">
+      <div class="admin-field" style="flex:1">
+        <label class="admin-label">Title</label>
+        ${aInp('text',vid.title,{action:'port-vid',vi,key:'title'},'e.g. Restaurant Promo 2026')}
+      </div>
+      <div style="padding-top:18px">
+        <button class="admin-rm-btn" data-action="rm-port-vid" data-vi="${vi}">✕</button>
+      </div>
+    </div>
+  </div>`).join('')}
+  <button class="admin-add-btn" data-action="add-port-vid">+ Add video</button>
+</div>`;
+}
+
 // ── ADMIN EVENT HANDLERS ──────────────────────────────────────────────
 
 function onAdminInput(e){
@@ -1421,6 +1633,14 @@ function onAdminInput(e){
     const gi=+t.dataset.gi,ii=+t.dataset.ii,key=t.dataset.key;
     CUST_GROUPS[gi].items[ii][key]=key==='price'?numVal:strVal;
     refreshDerived();renderComps();
+  }
+  else if(action==='port-img'){
+    PORTFOLIO.images[+t.dataset.ii][t.dataset.key]=strVal;
+    renderPortImages();
+  }
+  else if(action==='port-vid'){
+    PORTFOLIO.videos[+t.dataset.vi][t.dataset.key]=strVal;
+    renderPortVideos();
   }
   persistData();
 }
@@ -1470,6 +1690,26 @@ function onAdminClick(e){
     CUST_GROUPS[gi].items.splice(ii,1);
     refreshDerived();renderComps();renderBar();persistData();renderAdmin();return;
   }
+  if(action==='port-img-wide'){
+    PORTFOLIO.images[+t.dataset.ii].wide=t.checked;
+    renderPortImages();persistData();return;
+  }
+  if(action==='add-port-img'){
+    PORTFOLIO.images.push({id:'pi_'+Date.now(),src:'',alt:'',wide:false});
+    persistData();renderAdmin();return;
+  }
+  if(action==='rm-port-img'){
+    PORTFOLIO.images.splice(+t.dataset.ii,1);
+    renderPortImages();persistData();renderAdmin();return;
+  }
+  if(action==='add-port-vid'){
+    PORTFOLIO.videos.push({id:'pv_'+Date.now(),url:'',title:''});
+    persistData();renderAdmin();return;
+  }
+  if(action==='rm-port-vid'){
+    PORTFOLIO.videos.splice(+t.dataset.vi,1);
+    renderPortVideos();persistData();renderAdmin();return;
+  }
 }
 
 // ── INIT ──────────────────────────────────────────────────────────────
@@ -1481,6 +1721,7 @@ function init(){
     document.getElementById('modeIcon').className='fa-solid fa-moon';
   }
   applyBranding();
+  renderPortfolio();
   renderPkgs();
   renderCatTabs();
   renderAddons();
